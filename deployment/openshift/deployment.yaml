@@ -82,6 +82,7 @@ spec:
                 configMapKeyRef:
                   name: template-agent-config
                   key: SSO_CALLBACK_URL
+                  optional: true
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:

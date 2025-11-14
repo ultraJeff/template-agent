@@ -1,0 +1,69 @@
+# Python virtual environments (BIGGEST savings - don't upload local venv!)
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Development and test files
+tests/
+test_*.py
+*_test.py
+examples/
+.coverage
+htmlcov/
+*.log
+
+# Git and version control
+.git/
+.gitignore
+.gitattributes
+
+# IDE and editor files
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+*~
+
+# CI/CD and development tools
+.github/
+.pre-commit-config.yaml
+Makefile
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Deployment files (don't need these in the image)
+deployment/
+compose.yaml
+docker-compose*.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+uv.lock
+bandit-report.json
+safety-report.json
+
+# Environment and config files (secrets go in OpenShift secrets)
+.env
+.env.*
+*.tmp
+*.bak

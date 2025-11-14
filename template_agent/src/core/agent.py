@@ -161,7 +161,11 @@ async def get_template_agent(
             )
 
     # Initialize the language model
-    model = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
+    model = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        temperature=0.3,
+        google_api_key=settings.GOOGLE_API_KEY,
+    )
 
     if not enable_checkpointing:
         # Create agent without checkpointing for streaming-only operations
