@@ -1,7 +1,7 @@
 """Google credentials management utilities.
 
-This module provides functions for initializing Google Generative AI with various
-credential formats including base64-encoded, file paths, and direct JSON content.
+This module provides functions for initializing Google Generative AI with API key
+or legacy service account credentials.
 """
 
 import base64
@@ -15,12 +15,32 @@ logger = get_python_logger()
 
 
 def initialize_google_genai():
-    """Initialize Google Generative AI with service account credentials."""
-    credentials_file = None
+    """Initialize Google Generative AI with API key or service account credentials.
 
-    if not settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT:
-        logger.warning("No Google service account credentials configured")
+    Preferred method: Set GOOGLE_API_KEY environment variable.
+    Legacy method: Use GOOGLE_APPLICATION_CREDENTIALS_CONTENT (service account JSON).
+    """
+    # Prefer API key authentication (simpler and recommended)
+    if settings.GOOGLE_API_KEY:
+        os.environ["GOOGLE_API_KEY"] = settings.GOOGLE_API_KEY
+        logger.info("Initialized Google Generative AI with API key")
         return
+
+    # Fall back to service account credentials for backward compatibility
+    if not settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT:
+        logger.warning(
+            "No Google credentials configured. Set GOOGLE_API_KEY environment variable "
+            "to authenticate with Google Generative AI."
+        )
+        return
+
+    # Legacy service account authentication
+    logger.warning(
+        "Using deprecated GOOGLE_APPLICATION_CREDENTIALS_CONTENT. "
+        "Consider migrating to GOOGLE_API_KEY for simpler authentication."
+    )
+
+    credentials_file = None
 
     # Check if credentials are provided as base64-encoded environment variable
     if settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT.startswith("ewog"):
@@ -60,7 +80,7 @@ def initialize_google_genai():
     elif os.path.exists(settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT):
         credentials_file = settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT
         logger.info(
-            f"Initialized Google Generative AI with service account file: {settings.GOOGLE_SERVICE_ACCOUNT_FILE}"
+            f"Initialized Google Generative AI with service account file: {credentials_file}"
         )
 
     # Check if credentials are provided as direct JSON content
@@ -92,7 +112,7 @@ def initialize_google_genai():
 
     else:
         logger.warning(
-            f"Google service account credentials not found or invalid format: {settings.GOOGLE_SERVICE_ACCOUNT_FILE[:50]}..."
+            f"Google service account credentials not found or invalid format: {settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT[:50] if settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT else 'None'}..."
         )
         return
 

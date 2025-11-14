@@ -90,7 +90,13 @@ class Settings(BaseSettings):
         default="development", json_schema_extra={"env": "LANGFUSE_TRACING_ENVIRONMENT"}
     )
 
-    # Google Application Credentials
+    # Google API Key (for Generative AI / Gemini)
+    GOOGLE_API_KEY: Optional[str] = Field(
+        default=None,
+        json_schema_extra={"env": "GOOGLE_API_KEY"},
+    )
+
+    # Deprecated: Use GOOGLE_API_KEY instead
     GOOGLE_APPLICATION_CREDENTIALS_CONTENT: Optional[str] = Field(
         default=None,
         json_schema_extra={"env": "GOOGLE_APPLICATION_CREDENTIALS_CONTENT"},

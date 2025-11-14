@@ -34,8 +34,8 @@ stringData:
   LANGFUSE_PUBLIC_KEY: ""              # Optional: Langfuse public key
   LANGFUSE_SECRET_KEY: ""              # Optional: Langfuse secret key
   LANGFUSE_HOST: ""                    # Optional: Langfuse host URL
-  GOOGLE_SERVICE_ACCOUNT_FILE: ""      # Optional: Google service account path
-  GOOGLE_APPLICATION_CREDENTIALS_CONTENT: ""  # Optional: Google credentials JSON
+  GOOGLE_API_KEY: ""                   # Optional: Google Generative AI API key (preferred)
+  GOOGLE_APPLICATION_CREDENTIALS_CONTENT: ""  # Optional: Google credentials JSON (deprecated)
   SSO_CLIENT_ID: ""                    # Optional: SSO client ID
   SSO_CLIENT_SECRET: ""                # Optional: SSO client secret
   SNOWFLAKE_ACCOUNT: ""                # Optional: Snowflake account

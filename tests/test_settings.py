@@ -59,6 +59,7 @@ class TestSettings:
         assert settings.LANGFUSE_PUBLIC_KEY is None
         assert settings.LANGFUSE_SECRET_KEY is None
         assert settings.LANGFUSE_HOST is None
+        assert settings.GOOGLE_API_KEY is None
         assert settings.GOOGLE_APPLICATION_CREDENTIALS_CONTENT is None
 
 

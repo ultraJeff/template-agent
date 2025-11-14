@@ -110,6 +110,12 @@ spec:
                   name: template-agent-secrets
                   key: LANGFUSE_HOST
                   optional: true
+            - name: GOOGLE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: template-agent-secrets
+                  key: GOOGLE_API_KEY
+                  optional: true
             - name: GOOGLE_APPLICATION_CREDENTIALS_CONTENT
               valueFrom:
                 secretKeyRef:
